@@ -1,6 +1,8 @@
 <section class="hero" id="hero-{{ section.id }}">
   {%- if section.settings.image -%}
     <img class="hero-img" src="{{ section.settings.image | image_url: width: 2000 }}" alt="{{ section.settings.image.alt | escape }}" loading="eager">
+  {%- else -%}
+    <img class="hero-img" src="{{ 'leggingmodel.png' | asset_url }}" alt="Legginx Rival Collection" loading="eager">
   {%- endif -%}
 
   <div class="hero-content">
