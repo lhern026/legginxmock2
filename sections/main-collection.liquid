@@ -21,8 +21,15 @@
         {%- endfor -%}
       </div>
       <div class="sort-custom" id="sort-custom-container">
+        {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+        {%- assign sort_name = 'Featured' -%}
+        {%- for option in collection.sort_options -%}
+          {%- if option.value == sort_by -%}
+            {%- assign sort_name = option.name -%}
+          {%- endif -%}
+        {%- endfor -%}
         <button type="button" class="sort-trigger" id="sort-trigger">
-          <span>Sort: {{ collection.sort_by | default: 'Featured' | capitalize | replace: '-', ' ' }}</span>
+          <span>Sort: {{ sort_name }}</span>
           {% render 'icon', name: 'chevron-down', size: 12 %}
         </button>
         <div class="sort-dropdown" id="sort-dropdown">

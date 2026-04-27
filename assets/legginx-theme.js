@@ -230,7 +230,10 @@
 
         grid.style.opacity = '1';
         grid.style.pointerEvents = 'auto';
-        window.history.pushState({ path: url }, '', url);
+        
+        if (history) {
+          window.history.pushState({ path: url }, '', url);
+        }
         
         // Re-bind all dynamic events
         initCollectionAJAX();
@@ -243,7 +246,8 @@
     links.forEach(link => {
       link.addEventListener('click', function (e) {
         e.preventDefault();
-        updateCollection(this.href);
+        const url = this.getAttribute('href');
+        if (url && url !== '#') updateCollection(url);
       });
     });
   }
@@ -252,12 +256,17 @@
     const trigger = document.getElementById('sort-trigger');
     const dropdown = document.getElementById('sort-dropdown');
     if (trigger && dropdown) {
-      trigger.addEventListener('click', function (e) {
+      // Clear existing listeners if any (simple way is to replace the element or just be careful)
+      trigger.onclick = function (e) {
         e.stopPropagation();
         dropdown.classList.toggle('open');
-      });
+      };
     }
   }
+
+  window.addEventListener('popstate', function () {
+    updateCollection(window.location.href);
+  });
 
   initCollectionAJAX();
   initSortDropdown();
