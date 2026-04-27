@@ -1,0 +1,93 @@
+{%- comment -%} Main collection template section — grid with filters {%- endcomment -%}
+{%- paginate collection.products by section.settings.products_per_page -%}
+<section class="section-padding page-width" id="collection-main">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Shop · {{ collection.products_count }} styles</div>
+      <h1 class="section-title">{{ collection.title }}</h1>
+    </div>
+  </div>
+
+  {%- if section.settings.show_sort -%}
+    <div class="filter-bar">
+      <div class="filter-group">
+        <span class="filter-label">Filter:</span>
+        {%- for tag in collection.all_tags -%}
+          {%- if current_tags contains tag -%}
+            <a href="{{ tag | link_to_remove_tag: tag }}" class="filter-pill active">{{ tag }}</a>
+          {%- else -%}
+            <a href="{{ tag | link_to_tag: tag }}" class="filter-pill">{{ tag }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <div class="sort-custom" id="sort-custom-container">
+        <button type="button" class="sort-trigger" id="sort-trigger">
+          <span>Sort: {{ collection.sort_by | default: 'Featured' | capitalize | replace: '-', ' ' }}</span>
+          {% render 'icon', name: 'chevron-down', size: 12 %}
+        </button>
+        <div class="sort-dropdown" id="sort-dropdown">
+          {%- for option in collection.sort_options -%}
+            <a href="{{ collection.url }}?sort_by={{ option.value }}" 
+               class="sort-option {% if collection.sort_by == option.value %}active{% endif %}"
+               data-value="{{ option.value }}">
+              {{ option.name }}
+            </a>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if collection.products.size > 0 -%}
+    <div class="product-grid">
+      {%- for product in collection.products -%}
+        {% render 'product-card', product: product %}
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    <p style="text-align:center; padding:var(--space-12) 0; color:var(--fg-2);">No products in this collection yet.</p>
+  {%- endif -%}
+
+  {%- if paginate.pages > 1 -%}
+    <div class="pagination">
+      {%- if paginate.previous -%}
+        <a href="{{ paginate.previous.url }}">← {{ 'general.pagination.previous' | t }}</a>
+      {%- endif -%}
+      {%- for part in paginate.parts -%}
+        {%- if part.is_link -%}
+          <a href="{{ part.url }}">{{ part.title }}</a>
+        {%- else -%}
+          <span class="current">{{ part.title }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if paginate.next -%}
+        <a href="{{ paginate.next.url }}">{{ 'general.pagination.next' | t }} →</a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Collection grid",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sort",
+      "label": "Show sort & filter bar",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

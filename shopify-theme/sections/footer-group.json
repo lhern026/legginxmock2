@@ -1,0 +1,19 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "tagline": "Cut for 5K. Built for the rest of the day."
+      },
+      "blocks": {
+        "shop": { "type": "menu_column", "settings": { "heading": "Shop" } },
+        "help": { "type": "menu_column", "settings": { "heading": "Help" } },
+        "company": { "type": "menu_column", "settings": { "heading": "Company" } }
+      },
+      "block_order": ["shop", "help", "company"]
+    }
+  },
+  "order": ["footer"]
+}

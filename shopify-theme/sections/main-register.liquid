@@ -1,0 +1,33 @@
+<section class="section-padding page-width" style="max-width:480px; margin:0 auto;">
+  <h1 style="font-family:var(--font-display); font-size:48px; text-transform:uppercase; font-weight:800; line-height:1; margin-bottom:32px; text-align:center;">{{ 'customer.register.title' | t }}</h1>
+  {%- form 'create_customer' -%}
+    {{ form.errors | default_errors }}
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+      <div class="form-field">
+        <label for="reg-first">{{ 'customer.register.first_name' | t }}</label>
+        <input type="text" name="customer[first_name]" id="reg-first" required>
+      </div>
+      <div class="form-field">
+        <label for="reg-last">{{ 'customer.register.last_name' | t }}</label>
+        <input type="text" name="customer[last_name]" id="reg-last" required>
+      </div>
+    </div>
+    <div class="form-field">
+      <label for="reg-email">{{ 'customer.register.email' | t }}</label>
+      <input type="email" name="customer[email]" id="reg-email" autocomplete="email" required>
+    </div>
+    <div class="form-field">
+      <label for="reg-password">{{ 'customer.register.password' | t }}</label>
+      <input type="password" name="customer[password]" id="reg-password" required>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block btn-lg">{{ 'customer.register.submit' | t }}</button>
+  {%- endform -%}
+</section>
+
+{% schema %}
+{
+  "name": "Customer register",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

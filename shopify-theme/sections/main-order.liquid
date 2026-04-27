@@ -1,0 +1,35 @@
+<section class="section-padding page-width">
+  <a href="/account" class="btn btn-ghost" style="margin-bottom:24px">← Back to account</a>
+  <h1 style="font-family:var(--font-display); font-size:48px; text-transform:uppercase; font-weight:800; line-height:1; margin-bottom:32px;">{{ order.name }}</h1>
+  <div class="order-meta-text" style="margin-bottom:24px">{{ order.created_at | date: '%B %d, %Y' }} · {{ order.fulfillment_status_label }}</div>
+
+  {%- for line_item in order.line_items -%}
+    <div class="cart-page-line">
+      <div class="cart-page-thumb">
+        {%- if line_item.image -%}
+          <img src="{{ line_item.image | image_url: width: 200 }}" alt="{{ line_item.title | escape }}">
+        {%- endif -%}
+      </div>
+      <div class="cart-info">
+        <div class="name">{{ line_item.title }}</div>
+        <div class="meta">Qty: {{ line_item.quantity }}</div>
+      </div>
+      <div class="cart-line-price" style="font-size:14px">{{ line_item.final_line_price | money }}</div>
+    </div>
+  {%- endfor -%}
+
+  <div style="text-align:right; padding:var(--space-6) 0; border-top:1px solid var(--border-1); margin-top:var(--space-4);">
+    <div class="cart-total">
+      <span>Total</span>
+      <span>{{ order.total_price | money }}</span>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Customer order",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

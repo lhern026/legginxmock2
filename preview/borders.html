@@ -1,0 +1,27 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+  .demo { display:flex; flex-direction:column; gap:8px; }
+  .line { height:1px; width:100%; }
+  .wrap { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+</style></head>
+<body>
+<div class="card">
+  <div class="label">Borders</div>
+  <div class="wrap">
+    <div class="demo">
+      <div class="line" style="background:#D4D4CE"></div>
+      <div class="swatch-name">--border-1 · Stone-200</div>
+      <div class="swatch-hex">1px · dividers, inputs, default cards</div>
+    </div>
+    <div class="demo">
+      <div class="line" style="background:#0A0A0A"></div>
+      <div class="swatch-name">--border-2 · Ink</div>
+      <div class="swatch-hex">1px · emphatic separators only</div>
+    </div>
+  </div>
+  <div class="swatch-hex" style="border-top:1px solid var(--stone-100);padding-top:12px;margin-top:4px">
+    No 2px. No dashed. No double. Borders are quiet.
+  </div>
+</div>
+</body></html>

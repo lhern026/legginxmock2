@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "about-page",
+      "settings": {
+        "show_hero": true,
+        "eyebrow": "About",
+        "heading": "We make the leggings we couldn't find. Cut clean. Built to last. Nothing else."
+      }
+    }
+  },
+  "order": ["main"]
+}

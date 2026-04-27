@@ -1,0 +1,98 @@
+{%- comment -%} About / page content section {%- endcomment -%}
+<section class="page-width" id="page-{{ section.id }}">
+  {%- if section.settings.show_hero -%}
+    <div class="about-hero">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="eyebrow" style="margin-bottom:24px">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+      <h1 class="about-pull">{{ section.settings.heading }}</h1>
+    </div>
+  {%- endif -%}
+
+  {%- for block in section.blocks -%}
+    <div class="about-grid" {{ block.shopify_attributes }} {% if block.settings.reverse %}style="direction:rtl"{% endif %}>
+      <div class="about-image" {% if block.settings.reverse %}style="direction:ltr"{% endif %}>
+        {%- if block.settings.image -%}
+          <img src="{{ block.settings.image | image_url: width: 1000 }}" alt="{{ block.settings.image.alt | escape }}" loading="lazy">
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+      <div class="about-text" {% if block.settings.reverse %}style="direction:ltr"{% endif %}>
+        {%- if block.settings.block_eyebrow != blank -%}
+          <div class="eyebrow">{{ block.settings.block_eyebrow }}</div>
+        {%- endif -%}
+        {%- if block.settings.block_heading != blank -%}
+          <h2 style="font-family:var(--font-display); font-size:64px; line-height:0.95; text-transform:uppercase; font-weight:400; margin:8px 0 16px;">{{ block.settings.block_heading }}</h2>
+        {%- endif -%}
+        <div>{{ block.settings.text }}</div>
+      </div>
+    </div>
+  {%- endfor -%}
+</section>
+
+{% schema %}
+{
+  "name": "About page",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_hero",
+      "label": "Show hero area",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "About"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "We make the leggings we couldn't find. Cut clean. Built to last. Nothing else."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "content_row",
+      "name": "Content row",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "block_eyebrow",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "text",
+          "id": "block_heading",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Body text"
+        },
+        {
+          "type": "checkbox",
+          "id": "reverse",
+          "label": "Reverse layout (text left, image right)",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About page"
+    }
+  ]
+}
+{% endschema %}

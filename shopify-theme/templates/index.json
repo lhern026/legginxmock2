@@ -1,0 +1,44 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "eyebrow": "RIVAL · SS26",
+        "headline": "RUN.<br>LIFT.<br>REPEAT.",
+        "meta_line_1": "FREE SHIPPING ALL ORDERS",
+        "meta_line_2": "$24 — $29",
+        "cta_text": "Shop Rival"
+      }
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Bestsellers",
+        "heading": "Rival",
+        "products_to_show": 4
+      }
+    },
+    "newsletter": {
+      "type": "newsletter-band",
+      "settings": {
+        "heading": "BUILT<br>FOR THE<br>LONG RUN.",
+        "subtext": "Free shipping on every order. New colorways added monthly.",
+        "show_form": true
+      }
+    },
+    "tiles": {
+      "type": "collection-tiles",
+      "settings": {
+        "eyebrow": "Shop the line",
+        "heading": "Glow · Aura · Essentials"
+      },
+      "blocks": {
+        "tile1": { "type": "tile", "settings": { "title": "Glow" } },
+        "tile2": { "type": "tile", "settings": { "title": "Aura", "contain": true } },
+        "tile3": { "type": "tile", "settings": { "title": "Essentials", "contain": true } }
+      },
+      "block_order": ["tile1", "tile2", "tile3"]
+    }
+  },
+  "order": ["hero", "featured", "newsletter", "tiles"]
+}

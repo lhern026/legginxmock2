@@ -1,0 +1,50 @@
+{%- comment -%} Newsletter / CTA band — dark ink background {%- endcomment -%}
+<section class="news-band" id="newsletter-{{ section.id }}">
+  <h2>{{ section.settings.heading }}</h2>
+  {%- if section.settings.subtext != blank -%}
+    <p style="max-width:480px; margin:0 auto 32px; font-size:15px; color:var(--stone-300); line-height:1.6;">
+      {{ section.settings.subtext }}
+    </p>
+  {%- endif -%}
+  {%- if section.settings.show_form -%}
+    {%- form 'customer', id: 'newsletter-form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div class="news-form">
+        <input type="email" name="contact[email]" placeholder="{{ 'general.newsletter.placeholder' | t }}" required autocomplete="email">
+        <button type="submit">{{ 'general.newsletter.submit' | t }} →</button>
+      </div>
+    {%- endform -%}
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter band",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading (use <br> for line breaks)",
+      "default": "BUILT<br>FOR THE<br>LONG RUN."
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Free shipping on every order. New colorways added monthly."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_form",
+      "label": "Show email signup form",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter band"
+    }
+  ]
+}
+{% endschema %}

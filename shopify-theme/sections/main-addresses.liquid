@@ -1,0 +1,16 @@
+<section class="section-padding page-width">
+  <h1 style="font-family:var(--font-display); font-size:48px; text-transform:uppercase; font-weight:800; line-height:1; margin-bottom:32px;">{{ 'customer.account.addresses' | t }}</h1>
+  {%- for address in customer.addresses -%}
+    <div style="padding:20px 0; border-bottom:1px solid var(--border-1);">
+      <p style="font-size:14px;">{{ address | format_address }}</p>
+    </div>
+  {%- endfor -%}
+</section>
+
+{% schema %}
+{
+  "name": "Customer addresses",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

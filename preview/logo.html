@@ -1,0 +1,29 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+  .grid { display:grid; grid-template-columns:1.4fr 1fr 0.6fr; gap:16px; align-items:stretch; }
+  .tile { display:flex; flex-direction:column; gap:8px; }
+  .surface { display:flex; align-items:center; justify-content:center; min-height:90px; }
+  .light { background:#FAFAF7; border:1px solid #E8E8E3; }
+  .dark  { background:#0A0A0A; }
+</style></head>
+<body>
+<div class="card">
+  <div class="label">Logo system</div>
+  <div class="grid">
+    <div class="tile">
+      <div class="surface light"><img src="../assets/logo-mark.png" style="width:48px;height:auto"></div>
+      <div class="swatch-hex">Trident mark · primary</div>
+    </div>
+    <div class="tile">
+      <div class="surface dark"><img src="../assets/logo-mark-inverted.png" style="width:48px;height:auto"></div>
+      <div class="swatch-hex">Trident mark · inverted</div>
+    </div>
+    <div class="tile">
+      <div class="surface light" style="gap:14px"><img src="../assets/logo-mark.png" style="width:32px;height:auto"><span style="font-family:Inter,sans-serif;font-size:14px;letter-spacing:.4em">LEGGINX</span></div>
+      <div class="swatch-hex">Lockup · mark + wordmark</div>
+    </div>
+  </div>
+  <div class="swatch-hex">Trident mark provided by user. Wordmark is set in Inter — flag for review.</div>
+</div>
+</body></html>

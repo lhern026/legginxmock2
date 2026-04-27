@@ -1,0 +1,27 @@
+<section class="section-padding page-width" style="max-width:480px; margin:0 auto;">
+  <h1 style="font-family:var(--font-display); font-size:48px; text-transform:uppercase; font-weight:800; line-height:1; margin-bottom:32px; text-align:center;">{{ 'customer.login.title' | t }}</h1>
+  {%- form 'customer_login' -%}
+    {{ form.errors | default_errors }}
+    <div class="form-field">
+      <label for="login-email">{{ 'customer.login.email' | t }}</label>
+      <input type="email" name="customer[email]" id="login-email" autocomplete="email" required>
+    </div>
+    <div class="form-field">
+      <label for="login-password">{{ 'customer.login.password' | t }}</label>
+      <input type="password" name="customer[password]" id="login-password" required>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block btn-lg">{{ 'customer.login.submit' | t }}</button>
+    <div style="display:flex; justify-content:space-between; margin-top:16px; font-size:13px;">
+      <a href="/account/register" style="text-decoration:underline; text-underline-offset:4px;">{{ 'customer.login.create_account' | t }}</a>
+      <a href="#recover" style="text-decoration:underline; text-underline-offset:4px;">{{ 'customer.login.forgot_password' | t }}</a>
+    </div>
+  {%- endform -%}
+</section>
+
+{% schema %}
+{
+  "name": "Customer login",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

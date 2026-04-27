@@ -1,0 +1,33 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+  .field { display:flex; flex-direction:column; gap:6px; }
+  .field-label { font-family:var(--font-mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--fg-2); }
+  input[type=text], input[type=email] {
+    font-family:var(--font-body); font-size:14px; padding:12px 14px;
+    border:1px solid #D4D4CE; background:#FAFAF7; color:#0A0A0A;
+    border-radius:0; outline:none; transition: border-color 160ms;
+  }
+  input:focus { border-color:#0A0A0A; }
+  .row5 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+</style></head>
+<body>
+<div class="card">
+  <div class="label">Form fields</div>
+  <div class="row5">
+    <div class="field">
+      <div class="field-label">Email</div>
+      <input type="email" value="athlete@legginx.com">
+    </div>
+    <div class="field">
+      <div class="field-label">Postal code</div>
+      <input type="text" placeholder="00000">
+    </div>
+  </div>
+  <div class="field">
+    <div class="field-label">Address</div>
+    <input type="text" placeholder="Street, city, state" style="border-color:#0A0A0A">
+  </div>
+  <div class="swatch-hex">Sharp corners · 1px Stone-200 · focus = Ink border, no glow</div>
+</div>
+</body></html>

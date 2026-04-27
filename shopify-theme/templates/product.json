@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "show_specs": true
+      },
+      "blocks": {
+        "spec1": { "type": "spec_row", "settings": { "label": "Inseam", "value": "26\"" } },
+        "spec2": { "type": "spec_row", "settings": { "label": "Rise", "value": "High · 11\"" } },
+        "spec3": { "type": "spec_row", "settings": { "label": "Fabric", "value": "Nylon 78 / Spandex 22" } },
+        "spec4": { "type": "spec_row", "settings": { "label": "Wash", "value": "Cold · Hang dry" } },
+        "spec5": { "type": "spec_row", "settings": { "label": "Shipping", "value": "Free · All orders" } }
+      },
+      "block_order": ["spec1", "spec2", "spec3", "spec4", "spec5"]
+    }
+  },
+  "order": ["main"]
+}

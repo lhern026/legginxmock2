@@ -1,0 +1,60 @@
+{%- comment -%} Main cart page section {%- endcomment -%}
+<section class="section-padding page-width" id="cart-page">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">{{ 'general.cart.title' | t }}</div>
+      <h1 class="section-title">Bag</h1>
+    </div>
+  </div>
+
+  {%- if cart.item_count == 0 -%}
+    <div class="cart-empty" style="padding:var(--space-14) 0">
+      <p style="margin-bottom:16px; font-size:18px;">{{ 'general.cart.empty' | t }}</p>
+      <a href="/collections/all" class="btn btn-primary">Continue shopping</a>
+    </div>
+  {%- else -%}
+    <form action="/cart" method="post" id="cart-form">
+      {%- for item in cart.items -%}
+        <div class="cart-page-line">
+          <div class="cart-page-thumb">
+            {%- if item.image -%}
+              <a href="{{ item.url }}"><img src="{{ item.image | image_url: width: 300 }}" alt="{{ item.title | escape }}"></a>
+            {%- endif -%}
+          </div>
+          <div class="cart-info">
+            <a href="{{ item.url }}" class="name">{{ item.product.title }}</a>
+            <div class="meta">
+              {%- for option in item.options_with_values -%}
+                {{ option.value }}{% unless forloop.last %} · {% endunless %}
+              {%- endfor -%}
+            </div>
+            <div class="cart-qty" style="margin-top:12px">
+              <label class="visually-hidden" for="qty-{{ item.key }}">Quantity</label>
+              <input type="number" name="updates[]" id="qty-{{ item.key }}" value="{{ item.quantity }}" min="0" style="width:60px; text-align:center; border:1px solid var(--border-1); padding:8px; font-family:var(--font-mono); font-size:12px;">
+            </div>
+          </div>
+          <div class="cart-line-price" style="font-size:14px">{{ item.final_line_price | money }}</div>
+        </div>
+      {%- endfor -%}
+
+      <div style="display:flex; justify-content:flex-end; padding:var(--space-8) 0; gap:32px; align-items:center; border-top:1px solid var(--border-1);">
+        <div class="cart-total" style="gap:24px">
+          <span>{{ 'general.cart.subtotal' | t }}</span>
+          <span>{{ cart.total_price | money }}</span>
+        </div>
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:16px;">
+        <button type="submit" name="update" class="btn btn-secondary">Update</button>
+        <button type="submit" name="checkout" class="btn btn-primary btn-lg">{{ 'general.cart.checkout' | t }}</button>
+      </div>
+    </form>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Cart page",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

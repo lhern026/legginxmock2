@@ -1,0 +1,21 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+  .grid { display:flex; gap:24px; align-items:flex-end; }
+  .demo { display:flex; flex-direction:column; gap:8px; align-items:center; }
+  .box { width:80px; height:80px; background:#0A0A0A; }
+  .pill { width:60px; height:60px; background:#0A0A0A; border-radius:9999px; }
+</style></head>
+<body>
+<div class="card">
+  <div class="label">Corner radii — almost always zero</div>
+  <div class="grid">
+    <div class="demo"><div class="box" style="border-radius:0"></div><div class="swatch-name">radius-0</div><div class="swatch-hex">0px · default</div></div>
+    <div class="demo"><div class="box" style="border-radius:2px"></div><div class="swatch-name">radius-1</div><div class="swatch-hex">2px · chips only</div></div>
+    <div class="demo"><div class="pill"></div><div class="swatch-name">radius-pill</div><div class="swatch-hex">9999px · size dot</div></div>
+    <div class="demo" style="border-left:1px solid var(--stone-200);padding-left:24px;align-items:flex-start">
+      <div class="swatch-hex" style="text-align:left;line-height:1.6">No 4px.<br>No 8px.<br>No 12px.<br>Rounded rectangles<br>do not exist here.</div>
+    </div>
+  </div>
+</div>
+</body></html>

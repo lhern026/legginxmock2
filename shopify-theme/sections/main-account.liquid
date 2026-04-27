@@ -1,0 +1,41 @@
+{%- comment -%} Customer account section {%- endcomment -%}
+<section class="page-width">
+  <div class="account-layout">
+    <aside class="account-nav">
+      <div class="eyebrow" style="margin-bottom:16px">{{ customer.name }}</div>
+      <a href="/account" class="active">{{ 'customer.account.orders' | t }}</a>
+      <a href="/account/addresses">{{ 'customer.account.addresses' | t }}</a>
+      <a href="/account/logout">{{ 'customer.account.logout' | t }}</a>
+    </aside>
+    <div>
+      <h1 style="font-family:var(--font-display); font-size:48px; text-transform:uppercase; font-weight:800; line-height:1; margin-bottom:32px;">{{ 'customer.orders.title' | t }}</h1>
+      {%- for order in customer.orders -%}
+        <div class="order-row">
+          <div>
+            <div class="order-meta-text">{{ order.name }} · {{ order.created_at | date: '%d %b %Y' | upcase }}</div>
+            <div style="font-size:13px">
+              {%- for line_item in order.line_items -%}
+                {{ line_item.title }} × {{ line_item.quantity }}{% unless forloop.last %} · {% endunless %}
+              {%- endfor -%}
+            </div>
+          </div>
+          <div style="text-align:right; display:flex; flex-direction:column; gap:8px; align-items:flex-end;">
+            <span class="order-status-tag {% if order.fulfillment_status == 'fulfilled' %}fulfilled{% endif %}">{{ order.fulfillment_status_label }}</span>
+            <div class="order-total-text">{{ order.total_price | money }}</div>
+          </div>
+        </div>
+      {%- endfor -%}
+      {%- if customer.orders.size == 0 -%}
+        <p style="color:var(--fg-2)">No orders yet.</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Customer account",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

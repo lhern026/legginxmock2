@@ -1,0 +1,31 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+  .row6 { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .size { width:44px; height:44px; border-radius:9999px; border:1px solid #D4D4CE; display:flex; align-items:center; justify-content:center; font-family:var(--font-body); font-size:12px; letter-spacing:.08em; cursor:pointer; transition:all 160ms; }
+  .size:hover { border-color:#0A0A0A; }
+  .size.sel { background:#0A0A0A; color:#FAFAF7; border-color:#0A0A0A; }
+  .size.dis { color:#B8B8B2; text-decoration:line-through; }
+  .swatchrow { display:flex; gap:8px; }
+  .cs { width:24px; height:24px; border:1px solid #D4D4CE; cursor:pointer; }
+  .cs.sel { outline:1px solid #0A0A0A; outline-offset:2px; }
+</style></head>
+<body>
+<div class="card">
+  <div class="label">Size selector — only place pills exist</div>
+  <div class="row6">
+    <div class="size">XS</div>
+    <div class="size">S</div>
+    <div class="size sel">M</div>
+    <div class="size">L</div>
+    <div class="size dis">XL</div>
+  </div>
+  <div class="label" style="margin-top:8px">Color swatches — square, never round</div>
+  <div class="swatchrow">
+    <div class="cs sel" style="background:#0A0A0A"></div>
+    <div class="cs" style="background:#FAFAF7"></div>
+    <div class="cs" style="background:#4C4C47"></div>
+    <div class="cs" style="background:#94948E"></div>
+  </div>
+</div>
+</body></html>

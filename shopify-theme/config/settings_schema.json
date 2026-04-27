@@ -1,0 +1,173 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Legginx",
+    "theme_version": "1.0.0",
+    "theme_author": "Legginx",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo width (px)",
+        "min": 16,
+        "max": 120,
+        "step": 2,
+        "default": 22,
+        "unit": "px"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Foundation"
+      },
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Ink (primary dark)",
+        "default": "#0A0A0A"
+      },
+      {
+        "type": "color",
+        "id": "color_paper",
+        "label": "Paper (primary light)",
+        "default": "#FAFAF7"
+      },
+      {
+        "type": "header",
+        "content": "Stone scale"
+      },
+      {
+        "type": "color",
+        "id": "color_stone_50",
+        "label": "Stone 50",
+        "default": "#F4F4F0"
+      },
+      {
+        "type": "color",
+        "id": "color_stone_100",
+        "label": "Stone 100",
+        "default": "#E8E8E3"
+      },
+      {
+        "type": "color",
+        "id": "color_stone_200",
+        "label": "Stone 200",
+        "default": "#D4D4CE"
+      },
+      {
+        "type": "color",
+        "id": "color_stone_300",
+        "label": "Stone 300",
+        "default": "#B8B8B2"
+      },
+      {
+        "type": "color",
+        "id": "color_stone_400",
+        "label": "Stone 400",
+        "default": "#94948E"
+      },
+      {
+        "type": "color",
+        "id": "color_stone_500",
+        "label": "Stone 500",
+        "default": "#6E6E68"
+      },
+      {
+        "type": "color",
+        "id": "color_stone_600",
+        "label": "Stone 600",
+        "default": "#4C4C47"
+      },
+      {
+        "type": "color",
+        "id": "color_stone_700",
+        "label": "Stone 700",
+        "default": "#2E2E2B"
+      },
+      {
+        "type": "color",
+        "id": "color_stone_800",
+        "label": "Stone 800",
+        "default": "#1A1A18"
+      },
+      {
+        "type": "color",
+        "id": "color_stone_900",
+        "label": "Stone 900",
+        "default": "#0F0F0E"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body font",
+        "default": "inter_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading font",
+        "default": "inter_n4"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok",
+        "label": "TikTok URL"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "cart_drawer_enabled",
+        "label": "Enable cart drawer",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_text",
+        "label": "Free shipping message",
+        "default": "Free shipping · All orders"
+      }
+    ]
+  }
+]

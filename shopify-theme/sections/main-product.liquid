@@ -1,0 +1,168 @@
+{%- comment -%} Main product section — PDP layout {%- endcomment -%}
+<section class="page-width">
+  <div class="pdp" id="pdp-{{ product.id }}">
+    <!-- Gallery -->
+    <div class="pdp-gallery">
+      {%- for image in product.images limit: 4 -%}
+        <div class="product-image-wrap">
+          <img
+            src="{{ image | image_url: width: 900 }}"
+            alt="{{ image.alt | escape }}"
+            loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+            data-variant-image
+          >
+        </div>
+      {%- endfor -%}
+      {%- if product.images.size == 0 -%}
+        <div class="product-image-wrap">{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+      {%- endif -%}
+    </div>
+
+    <!-- Info -->
+    <div class="pdp-info">
+      <div class="eyebrow">
+        {{ product.type }}
+        {%- if product.metafields.custom.fit != blank %} · {{ product.metafields.custom.fit }}{% endif -%}
+      </div>
+
+      <h1 class="pdp-title">{{ product.title }}</h1>
+
+      <div class="pdp-price" id="pdp-price">
+        <span id="pdp-price-current">{{ product.selected_or_first_available_variant.price | money }}</span>
+        {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+          <span class="compare-at" id="pdp-compare-price">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
+        {%- endif -%}
+      </div>
+
+      {%- if product.description != blank -%}
+        <div class="pdp-desc">{{ product.description }}</div>
+      {%- endif -%}
+
+      {%- form 'product', product, id: 'product-form', data-product-form: '' -%}
+        <input type="hidden" name="id" id="variant-id" value="{{ product.selected_or_first_available_variant.id }}">
+
+        {%- for option in product.options_with_values -%}
+          <div class="pdp-section">
+            <div class="pdp-section-label">{{ option.name }} · <span id="selected-{{ option.name | handleize }}">{{ option.selected_value }}</span></div>
+            {%- if option.name == 'Size' -%}
+              <div class="size-group">
+                {%- for value in option.values -%}
+                  {%- assign variant_available = true -%}
+                  {%- for variant in product.variants -%}
+                    {%- if variant.options contains value -%}
+                      {%- if variant.available == false -%}
+                        {%- assign variant_available = false -%}
+                      {%- endif -%}
+                      {%- break -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  <button
+                    type="button"
+                    class="size-btn {% if option.selected_value == value %}active{% endif %} {% unless variant_available %}disabled{% endunless %}"
+                    data-option-name="{{ option.name }}"
+                    data-option-value="{{ value }}"
+                    {% unless variant_available %}disabled{% endunless %}
+                  >{{ value }}</button>
+                {%- endfor -%}
+              </div>
+            {%- elsif option.name == 'Color' -%}
+              <div class="color-group">
+                {%- for value in option.values -%}
+                  <button
+                    type="button"
+                    class="color-swatch {% if option.selected_value == value %}active{% endif %}"
+                    data-option-name="{{ option.name }}"
+                    data-option-value="{{ value }}"
+                    style="background: {{ value | handleize | replace: '-', '' }};"
+                    aria-label="{{ value }}"
+                  ></button>
+                {%- endfor -%}
+              </div>
+            {%- else -%}
+              <div class="size-group">
+                {%- for value in option.values -%}
+                  <button
+                    type="button"
+                    class="size-btn {% if option.selected_value == value %}active{% endif %}"
+                    data-option-name="{{ option.name }}"
+                    data-option-value="{{ value }}"
+                  >{{ value }}</button>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+
+        <button
+          type="submit"
+          class="btn btn-primary btn-lg btn-block"
+          id="add-to-cart"
+          {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+        >
+          {%- if product.selected_or_first_available_variant.available -%}
+            {{ 'products.product.add_to_cart' | t }} — {{ product.selected_or_first_available_variant.price | money }}
+          {%- else -%}
+            {{ 'products.product.sold_out' | t }}
+          {%- endif -%}
+        </button>
+      {%- endform -%}
+
+      {%- if section.settings.show_specs -%}
+        <div class="specs">
+          {%- for block in section.blocks -%}
+            <span>{{ block.settings.label }}</span><span>{{ block.settings.value }}</span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script type="application/json" id="product-json">{{ product | json }}</script>
+
+{% schema %}
+{
+  "name": "Product page",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_specs",
+      "label": "Show specs grid",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "spec_row",
+      "name": "Spec row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Fabric"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "Nylon 78 / Spandex 22"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product page",
+      "blocks": [
+        { "type": "spec_row", "settings": { "label": "Inseam", "value": "26\"" } },
+        { "type": "spec_row", "settings": { "label": "Rise", "value": "High · 11\"" } },
+        { "type": "spec_row", "settings": { "label": "Fabric", "value": "Nylon 78 / Spandex 22" } },
+        { "type": "spec_row", "settings": { "label": "Wash", "value": "Cold · Hang dry" } },
+        { "type": "spec_row", "settings": { "label": "Shipping", "value": "Free · All orders" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

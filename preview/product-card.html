@@ -1,0 +1,39 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+  .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; }
+  .pcard { display:flex; flex-direction:column; gap:6px; }
+  .pimg { aspect-ratio:3/4; background:#F4F4F0; overflow:hidden; }
+  .pimg img { width:100%; height:100%; object-fit:cover; display:block; }
+  .pline { font-family:var(--font-mono); font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--fg-2); margin-top:2px; }
+  .ptitle { font-family:var(--font-body); font-size:12px; font-weight:500; }
+  .pmeta  { font-family:var(--font-mono); font-size:10px; color:var(--fg-2); letter-spacing:.04em; }
+  .pprice { font-family:var(--font-mono); font-size:11px; }
+</style></head>
+<body>
+<div class="card">
+  <div class="grid">
+    <div class="pcard">
+      <div class="pimg"><img src="../assets/product/rival-leggings-navy.jpg"/></div>
+      <div class="pline">RIVAL</div>
+      <div class="ptitle">Rival Leggings</div>
+      <div class="pmeta">18 colors</div>
+      <div class="pprice">$29.00</div>
+    </div>
+    <div class="pcard">
+      <div class="pimg"><img src="../assets/product/glow-leggings-olive.jpg"/></div>
+      <div class="pline">GLOW</div>
+      <div class="ptitle">Glow Leggings</div>
+      <div class="pmeta">6 colors</div>
+      <div class="pprice">$29.00</div>
+    </div>
+    <div class="pcard">
+      <div class="pimg"><img src="../assets/product/rival-shorts-peach.jpg"/></div>
+      <div class="pline">RIVAL</div>
+      <div class="ptitle">Rival Shorts</div>
+      <div class="pmeta">8 colors</div>
+      <div class="pprice">$24.00</div>
+    </div>
+  </div>
+</div>
+</body></html>

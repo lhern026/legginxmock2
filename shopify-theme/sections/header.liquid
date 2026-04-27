@@ -1,0 +1,49 @@
+{%- comment -%} Header section — sticky nav with logo, links, and icons {%- endcomment -%}
+<nav class="site-nav" id="site-nav">
+  <a href="/" class="nav-brand" aria-label="{{ shop.name }}">
+    {%- if settings.logo -%}
+      <img src="{{ settings.logo | image_url: width: 400 }}" alt="{{ shop.name }}" style="width: {{ settings.logo_width }}px; height: auto;">
+    {%- else -%}
+      <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" style="width: {{ settings.logo_width | default: 120 }}px; height: auto;">
+    {%- endif -%}
+  </a>
+
+  <div class="nav-links">
+    {%- for link in section.settings.menu.links -%}
+      <a href="{{ link.url }}" class="nav-link {% if link.active or link.child_active %}active{% endif %}">{{ link.title }}</a>
+    {%- endfor -%}
+  </div>
+
+  <div class="nav-icons">
+    <a href="/search" class="icon-btn" aria-label="Search">{% render 'icon', name: 'search' %}</a>
+    <a href="/account" class="icon-btn" aria-label="Account">{% render 'icon', name: 'user' %}</a>
+    <button class="icon-btn" aria-label="Bag" id="cart-toggle" data-cart-toggle>
+      {% render 'icon', name: 'bag' %}
+      <span class="cart-count" id="cart-count" {% if cart.item_count == 0 %}style="display:none"{% endif %}>{{ cart.item_count }}</span>
+    </button>
+    <button class="icon-btn mobile-menu-btn" aria-label="Menu" id="mobile-menu-toggle">{% render 'icon', name: 'menu' %}</button>
+  </div>
+</nav>
+
+<!-- Mobile nav overlay -->
+<div class="mobile-nav" id="mobile-nav">
+  <button class="mobile-nav-close icon-btn" id="mobile-nav-close" aria-label="Close menu">{% render 'icon', name: 'x', size: 28 %}</button>
+  {%- for link in section.settings.menu.links -%}
+    <a href="{{ link.url }}">{{ link.title }}</a>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "header-section",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

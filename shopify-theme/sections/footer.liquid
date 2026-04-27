@@ -1,0 +1,77 @@
+{%- comment -%} Footer section {%- endcomment -%}
+<footer class="site-footer" id="site-footer">
+  <div class="page-width">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          {%- if settings.logo -%}
+            <img src="{{ settings.logo | image_url: width: 128 }}" alt="{{ shop.name }}" style="width: 64px; height: auto;">
+          {%- else -%}
+            <span style="font-family:var(--font-display); font-size:64px; text-transform:uppercase;">{{ shop.name | truncate: 1, '' }}</span>
+          {%- endif -%}
+        </div>
+        <p class="footer-tagline">{{ section.settings.tagline }}</p>
+      </div>
+
+      {%- for block in section.blocks -%}
+        <div class="footer-col" {{ block.shopify_attributes }}>
+          <h5>{{ block.settings.heading }}</h5>
+          <ul>
+            {%- for link in block.settings.menu.links -%}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+      <span>
+        {%- for link in section.settings.legal_menu.links -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>{% unless forloop.last %} · {% endunless %}
+        {%- endfor -%}
+      </span>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "footer-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Cut for 5K. Built for the rest of the day."
+    },
+    {
+      "type": "link_list",
+      "id": "legal_menu",
+      "label": "Legal menu (bottom row)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu_column",
+      "name": "Menu column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4
+}
+{% endschema %}

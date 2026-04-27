@@ -1,0 +1,19 @@
+{
+  "current": {
+    "color_ink": "#0A0A0A",
+    "color_paper": "#FAFAF7",
+    "color_stone_50": "#F4F4F0",
+    "color_stone_100": "#E8E8E3",
+    "color_stone_200": "#D4D4CE",
+    "color_stone_300": "#B8B8B2",
+    "color_stone_400": "#94948E",
+    "color_stone_500": "#6E6E68",
+    "color_stone_600": "#4C4C47",
+    "color_stone_700": "#2E2E2B",
+    "color_stone_800": "#1A1A18",
+    "color_stone_900": "#0F0F0E",
+    "logo_width": 22,
+    "cart_drawer_enabled": true,
+    "free_shipping_text": "Free shipping · All orders"
+  }
+}

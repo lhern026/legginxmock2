@@ -1,0 +1,30 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .col { display:flex; flex-direction:column; gap:8px; }
+  .col h4 { font-family:var(--font-mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; margin:0; }
+  .yes h4 { color:#0A0A0A; }
+  .no  h4 { color:#8B2A2A; }
+  .ex  { font-size:13px; line-height:1.5; }
+  .ex.strike { color:#94948E; text-decoration:line-through; }
+</style></head>
+<body>
+<div class="card">
+  <div class="label">Voice & tone</div>
+  <div class="grid">
+    <div class="col yes">
+      <h4>Do</h4>
+      <div class="ex">"Compression where you need it."</div>
+      <div class="ex">"Cut for 5K. Built for the rest of the day."</div>
+      <div class="ex">"The Core Legging. Black. Bone. Charcoal."</div>
+    </div>
+    <div class="col no">
+      <h4>Don't</h4>
+      <div class="ex strike">"Hey runners! 💪 Crush your goals!"</div>
+      <div class="ex strike">"Our amazing new collection is finally here!!"</div>
+      <div class="ex strike">"Bestseller alert 🔥"</div>
+    </div>
+  </div>
+</div>
+</body></html>

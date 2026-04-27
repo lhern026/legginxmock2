@@ -1,0 +1,49 @@
+{%- comment -%} Search results section {%- endcomment -%}
+<section class="section-padding page-width" id="search-results">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Search</div>
+      <h1 class="section-title">
+        {%- if search.performed -%}
+          "{{ search.terms | escape }}"
+        {%- else -%}
+          Search
+        {%- endif -%}
+      </h1>
+    </div>
+  </div>
+
+  <form action="/search" method="get" style="margin-bottom:var(--space-8)">
+    <div class="news-form" style="border-bottom-color:var(--ink); max-width:600px;">
+      <input type="text" name="q" value="{{ search.terms | escape }}" placeholder="Search products..." style="color:var(--ink)">
+      <button type="submit" style="color:var(--ink)">Search</button>
+    </div>
+  </form>
+
+  {%- if search.performed -%}
+    {%- if search.results_count > 0 -%}
+      <div class="product-grid">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {% render 'product-card', product: item %}
+          {%- else -%}
+            <a href="{{ item.url }}" class="product-card">
+              <div class="product-title">{{ item.title }}</div>
+              <div class="product-meta">{{ item.content | strip_html | truncate: 120 }}</div>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <p style="text-align:center; padding:var(--space-12) 0; color:var(--fg-2);">No results found. Try a different search.</p>
+    {%- endif -%}
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Search results",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+  .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .demo { padding:14px; border:1px solid var(--stone-200); }
+  .v { font-family:var(--font-mono); font-size:11px; color:var(--fg-1); letter-spacing:.04em; }
+  .k { font-family:var(--font-mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--fg-2); margin-bottom:4px; }
+</style></head>
+<body>
+<div class="card">
+  <div class="label">Motion — fades only, no bounce</div>
+  <div class="grid">
+    <div class="demo"><div class="k">Fast</div><div class="v">160ms</div><div class="swatch-hex">--dur-fast · hover</div></div>
+    <div class="demo"><div class="k">Base</div><div class="v">240ms</div><div class="swatch-hex">--dur-base · default</div></div>
+    <div class="demo"><div class="k">Slow</div><div class="v">400ms</div><div class="swatch-hex">--dur-slow · drawers</div></div>
+  </div>
+  <div class="demo" style="margin-top:0">
+    <div class="k">Easing</div>
+    <div class="v">cubic-bezier(0.2, 0, 0.2, 1)</div>
+    <div class="swatch-hex">One curve. Used for opacity + transform. Never spring. Never bounce.</div>
+  </div>
+</div>
+</body></html>
