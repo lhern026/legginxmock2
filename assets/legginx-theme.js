@@ -190,18 +190,82 @@
     });
   }
 
-  /* ---------- Custom Sort Dropdown ---------- */
-  var sortTrigger = document.getElementById('sort-trigger');
-  var sortDropdown = document.getElementById('sort-dropdown');
-  if (sortTrigger && sortDropdown) {
-    sortTrigger.addEventListener('click', function (e) {
-      e.stopPropagation();
-      sortDropdown.classList.toggle('open');
-    });
-    document.addEventListener('click', function () {
-      sortDropdown.classList.remove('open');
+  /* ---------- AJAX Collection Filtering/Sorting ---------- */
+  function updateCollection(url) {
+    const grid = document.querySelector('.product-grid');
+    if (!grid) return;
+    grid.style.opacity = '0.4';
+    grid.style.pointerEvents = 'none';
+
+    fetch(url)
+      .then(r => r.text())
+      .then(html => {
+        const temp = document.createElement('div');
+        temp.innerHTML = html;
+        
+        const newGrid = temp.querySelector('.product-grid');
+        const newPagination = temp.querySelector('.pagination');
+        const newFilterBar = temp.querySelector('.filter-bar');
+        
+        if (newGrid) {
+          grid.innerHTML = newGrid.innerHTML;
+          grid.className = newGrid.className; // preserve col counts
+        }
+        
+        const pagination = document.querySelector('.pagination');
+        if (newPagination) {
+          if (pagination) {
+            pagination.innerHTML = newPagination.innerHTML;
+          } else {
+            grid.insertAdjacentElement('afterend', newPagination);
+          }
+        } else if (pagination) {
+          pagination.remove();
+        }
+
+        const filterBar = document.querySelector('.filter-bar');
+        if (newFilterBar && filterBar) {
+          filterBar.innerHTML = newFilterBar.innerHTML;
+        }
+
+        grid.style.opacity = '1';
+        grid.style.pointerEvents = 'auto';
+        window.history.pushState({ path: url }, '', url);
+        
+        // Re-bind all dynamic events
+        initCollectionAJAX();
+        initSortDropdown();
+      });
+  }
+
+  function initCollectionAJAX() {
+    const links = document.querySelectorAll('.sort-option, .filter-pill, .pagination a');
+    links.forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        updateCollection(this.href);
+      });
     });
   }
+
+  function initSortDropdown() {
+    const trigger = document.getElementById('sort-trigger');
+    const dropdown = document.getElementById('sort-dropdown');
+    if (trigger && dropdown) {
+      trigger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+      });
+    }
+  }
+
+  initCollectionAJAX();
+  initSortDropdown();
+
+  document.addEventListener('click', function () {
+    const dropdown = document.getElementById('sort-dropdown');
+    if (dropdown) dropdown.classList.remove('open');
+  });
 
   /* ---------- Shopify.formatMoney fallback ---------- */
   if (typeof Shopify === 'undefined') window.Shopify = {};
