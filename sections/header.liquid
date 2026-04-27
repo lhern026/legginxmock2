@@ -1,11 +1,8 @@
 {%- comment -%} Header section — sticky nav with logo, links, and icons {%- endcomment -%}
 <nav class="site-nav" id="site-nav">
   <a href="/" class="nav-brand" aria-label="{{ shop.name }}">
-    {%- if settings.logo -%}
-      <img src="{{ settings.logo | image_url: width: 400 }}" alt="{{ shop.name }}" style="width: {{ settings.logo_width }}px; height: auto;">
-    {%- else -%}
-      <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" style="width: {{ settings.logo_width | default: 120 }}px; height: auto;">
-    {%- endif -%}
+    <img src="{{ 'logo-mark-inverted.png' | asset_url }}" alt="{{ shop.name }}" class="logo-inverted">
+    <img src="{{ 'logo-mark.png' | asset_url }}" alt="{{ shop.name }}" class="logo-standard">
   </a>
 
   <div class="nav-links">

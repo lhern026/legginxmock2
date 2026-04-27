@@ -276,6 +276,19 @@
     if (dropdown) dropdown.classList.remove('open');
   });
 
+  /* ---------- Scroll Handling ---------- */
+  const nav = document.getElementById('site-nav');
+  function handleScroll() {
+    if (!nav) return;
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }
+  window.addEventListener('scroll', handleScroll);
+  handleScroll();
+
   /* ---------- Shopify.formatMoney fallback ---------- */
   if (typeof Shopify === 'undefined') window.Shopify = {};
   if (!Shopify.formatMoney) {
