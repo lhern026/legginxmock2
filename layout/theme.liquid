@@ -30,6 +30,8 @@
 <body class="template-{{ template.name }}">
   <a href="#main-content" class="visually-hidden">{{ 'general.accessibility.skip_to_content' | t }}</a>
 
+  {% section 'announcement-bar' %}
+
   {% sections 'header-group' %}
 
   <main id="main-content" role="main">
