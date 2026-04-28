@@ -1,6 +1,6 @@
 {%- comment -%}
   Renders a product card.
-  Usage: {% render 'product-card', product: product %}
+  Usage: {% render 'product-card', product: product, show_badge: true %}
 {%- endcomment -%}
 <a href="{{ product.url }}" class="product-card" id="product-card-{{ product.id }}">
   <div class="product-image-wrap">
@@ -22,6 +22,19 @@
     {%- else -%}
       {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
     {%- endif -%}
+
+    {%- comment -%} "New" badge: shown if product was published within last 30 days or if show_badge is true {%- endcomment -%}
+    {%- assign now_timestamp = 'now' | date: '%s' | plus: 0 -%}
+    {%- assign product_timestamp = product.published_at | date: '%s' | plus: 0 -%}
+    {%- assign diff_seconds = now_timestamp | minus: product_timestamp -%}
+    {%- assign thirty_days = 2592000 -%}
+    {%- if diff_seconds <= thirty_days or show_badge -%}
+      <span class="product-badge product-badge--new">New</span>
+    {%- endif -%}
+
+    {%- if product.compare_at_price > product.price -%}
+      <span class="product-badge product-badge--sale">Sale</span>
+    {%- endif -%}
   </div>
   {%- if product.type != blank -%}
     <div class="product-line">{{ product.type }}</div>
@@ -30,5 +43,10 @@
   {%- if product.variants.size > 1 -%}
     <div class="product-meta">{{ product.variants.size }} options</div>
   {%- endif -%}
-  <div class="product-price">{{ product.price | money }}</div>
+  <div class="product-price">
+    {{ product.price | money }}
+    {%- if product.compare_at_price > product.price -%}
+      <span class="product-compare-price">{{ product.compare_at_price | money }}</span>
+    {%- endif -%}
+  </div>
 </a>

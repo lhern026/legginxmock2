@@ -1,0 +1,108 @@
+{%- comment -%} Instagram / Social CTA — editorial text block with social link {%- endcomment -%}
+<section class="insta-cta" id="insta-cta-{{ section.id }}">
+  <div class="insta-cta__inner">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="insta-cta__eyebrow">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+    <h2 class="insta-cta__headline">{{ section.settings.heading }}</h2>
+    {%- if section.settings.subtext != blank -%}
+      <p class="insta-cta__sub">{{ section.settings.subtext }}</p>
+    {%- endif -%}
+    {%- if section.settings.cta_text != blank -%}
+      <a href="{{ section.settings.cta_url }}" class="btn btn-outline insta-cta__btn" target="_blank" rel="noopener">
+        {{ section.settings.cta_text }}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+    {%- endif -%}
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="insta-cta__grid">
+      {%- for block in section.blocks -%}
+        <div class="insta-cta__tile" {{ block.shopify_attributes }}>
+          {%- if block.settings.image -%}
+            <img src="{{ block.settings.image | image_url: width: 480 }}" alt="{{ block.settings.alt | default: 'Instagram' | escape }}" loading="lazy">
+          {%- else -%}
+            <div class="insta-cta__tile-placeholder">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--stone-300)" stroke-width="1.5">
+                <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="var(--stone-300)" stroke="none"/>
+              </svg>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Instagram CTA",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Community"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading (use <br> for line breaks)",
+      "default": "JOIN<br>THE ELITE."
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Tag @legginx for a chance to be featured."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Follow @legginx"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button link",
+      "default": "https://www.instagram.com/legginx"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Instagram image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Alt text",
+          "default": "Instagram post"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Instagram CTA",
+      "blocks": [
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" }
+      ]
+    }
+  ]
+}
+{% endschema %}

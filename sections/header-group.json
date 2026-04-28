@@ -2,6 +2,13 @@
   "type": "header",
   "name": "Header group",
   "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "settings": {
+        "text": "Free Shipping All Orders",
+        "color_scheme": "dark"
+      }
+    },
     "header": {
       "type": "header",
       "settings": {
@@ -9,5 +16,5 @@
       }
     }
   },
-  "order": ["header"]
+  "order": ["announcement", "header"]
 }

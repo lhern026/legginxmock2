@@ -1,0 +1,99 @@
+{%- comment -%} Editorial product row — horizontal scroll with season tags {%- endcomment -%}
+{%- assign collection = section.settings.collection -%}
+<section class="editorial-row" id="editorial-{{ section.id }}">
+  <div class="page-width">
+    <div class="section-head">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+        {%- endif -%}
+        <h2 class="section-title">{{ section.settings.heading }}</h2>
+      </div>
+      {%- if collection -%}
+        <a href="{{ collection.url }}" class="btn btn-secondary">Shop {{ section.settings.heading }} →</a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="editorial-row__scroll">
+    {%- if collection -%}
+      {%- for product in collection.products limit: section.settings.products_to_show -%}
+        <a href="{{ product.url }}" class="editorial-row__card">
+          <div class="editorial-row__img">
+            {%- if product.featured_image -%}
+              <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy">
+            {%- else -%}
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+            {%- if section.settings.season_tag != blank -%}
+              <span class="editorial-row__season">{{ section.settings.season_tag }}</span>
+            {%- endif -%}
+          </div>
+          <div class="editorial-row__info">
+            <div class="editorial-row__name">{{ product.title }}</div>
+            <div class="editorial-row__price">{{ product.price | money }} <span class="editorial-row__arrow">→</span></div>
+          </div>
+        </a>
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..4) -%}
+        <div class="editorial-row__card">
+          <div class="editorial-row__img">
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            <span class="editorial-row__season">FW26</span>
+          </div>
+          <div class="editorial-row__info">
+            <div class="editorial-row__name">Product title</div>
+            <div class="editorial-row__price">$29.00 <span class="editorial-row__arrow">→</span></div>
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial row",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Featured"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Rival"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "season_tag",
+      "label": "Season tag overlay",
+      "default": "SS26"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial row"
+    }
+  ]
+}
+{% endschema %}

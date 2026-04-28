@@ -506,6 +506,172 @@ header, footer { animation: fadeIn var(--dur-base) var(--ease) both; }
 }
 .pagination .current { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
+/* Announcement bar */
+.announcement-bar {
+  background: var(--ink); color: var(--paper);
+  overflow: hidden; position: relative;
+}
+.announcement-bar[data-scheme="light"] { background: var(--paper); color: var(--ink); border-bottom: 1px solid var(--border-1); }
+.announcement-bar[data-scheme="accent"] { background: var(--stone-50); color: var(--ink); border-bottom: 1px solid var(--border-1); }
+.announcement-bar__inner {
+  display: flex; align-items: center; justify-content: center;
+  padding: 10px var(--space-6); gap: 12px;
+}
+.announcement-bar__link {
+  display: flex; align-items: center; gap: 12px;
+  text-decoration: none; color: inherit;
+}
+.announcement-bar__text {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  white-space: nowrap;
+}
+.announcement-bar__cta {
+  font-family: var(--font-body); font-size: 11px;
+  font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Product badges */
+.product-badge {
+  position: absolute; z-index: 3;
+  font-family: var(--font-mono); font-size: 9px;
+  font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 5px 10px;
+  pointer-events: none;
+}
+.product-badge--new {
+  top: 12px; left: 12px;
+  background: var(--ink); color: var(--paper);
+}
+.product-badge--sale {
+  top: 12px; right: 12px;
+  background: var(--status-error); color: var(--paper);
+}
+.product-compare-price {
+  text-decoration: line-through;
+  color: var(--fg-3); margin-left: 6px;
+  font-size: 11px;
+}
+
+/* Instagram CTA */
+.insta-cta {
+  padding: var(--space-14) var(--space-6);
+  text-align: center;
+  background: var(--stone-50);
+}
+.insta-cta__inner {
+  max-width: var(--max-page); margin: 0 auto;
+}
+.insta-cta__eyebrow {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--fg-2); margin-bottom: 24px;
+}
+.insta-cta__headline {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(64px, 12vw, 180px); line-height: 0.88;
+  letter-spacing: -0.04em; text-transform: uppercase;
+  margin: 0 0 24px;
+}
+.insta-cta__sub {
+  font-size: 15px; color: var(--fg-2);
+  line-height: 1.6; margin: 0 auto 32px;
+  max-width: 480px;
+}
+.insta-cta__btn {
+  border-color: var(--ink); color: var(--ink);
+}
+.insta-cta__btn:hover {
+  background: var(--ink); color: var(--paper);
+  border-color: var(--ink);
+}
+.insta-cta__btn svg { flex-shrink: 0; }
+.insta-cta__grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 4px; margin-top: var(--space-10);
+  max-width: var(--max-content); margin-left: auto; margin-right: auto;
+}
+.insta-cta__tile {
+  aspect-ratio: 1; overflow: hidden;
+  position: relative; cursor: pointer;
+}
+.insta-cta__tile img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease);
+}
+.insta-cta__tile:hover img { transform: scale(1.06); }
+.insta-cta__tile-placeholder {
+  width: 100%; height: 100%;
+  background: var(--stone-100);
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Editorial row */
+.editorial-row {
+  padding: var(--space-12) 0;
+}
+.editorial-row .section-head {
+  padding: 0 var(--space-6);
+  max-width: var(--max-page); margin: 0 auto var(--space-8);
+}
+.editorial-row__scroll {
+  display: flex; gap: 16px;
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  padding: 0 var(--space-6);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.editorial-row__scroll::-webkit-scrollbar { display: none; }
+.editorial-row__card {
+  flex: 0 0 300px; scroll-snap-align: start;
+  text-decoration: none; color: inherit;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: opacity var(--dur-fast) var(--ease);
+}
+.editorial-row__card:hover { opacity: 0.85; }
+.editorial-row__img {
+  position: relative; aspect-ratio: 3/4;
+  overflow: hidden; background: var(--stone-50);
+}
+.editorial-row__img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease);
+}
+.editorial-row__card:hover .editorial-row__img img { transform: scale(1.04); }
+.editorial-row__season {
+  position: absolute; top: 12px; right: 12px;
+  font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 5px 10px;
+  background: var(--paper); color: var(--ink);
+  border: 1px solid var(--border-1);
+}
+.editorial-row__info {
+  display: flex; justify-content: space-between; align-items: baseline;
+}
+.editorial-row__name {
+  font-size: 13px; font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.editorial-row__price {
+  font-family: var(--font-mono); font-size: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.editorial-row__arrow {
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all var(--dur-fast) var(--ease);
+}
+.editorial-row__card:hover .editorial-row__arrow {
+  opacity: 1; transform: translateX(0);
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .nav-links { display: none; }
@@ -516,9 +682,13 @@ header, footer { animation: fadeIn var(--dur-base) var(--ease) both; }
   .footer-grid, .about-grid, .account-layout { grid-template-columns: 1fr; }
   .hero-content { flex-direction: column; align-items: flex-start; left: 24px; bottom: 24px; right: 24px; gap: 24px; }
   .hero-meta { align-items: flex-start; }
+  .insta-cta__grid { grid-template-columns: repeat(2, 1fr); }
+  .editorial-row__card { flex: 0 0 260px; }
 }
 @media (max-width: 600px) {
   .product-grid { grid-template-columns: repeat(2,1fr); gap: var(--space-3); }
   .pdp-title { font-size: 36px; }
   .section-title { font-size: clamp(36px,8vw,64px); }
+  .insta-cta__headline { font-size: clamp(48px, 14vw, 120px); }
+  .editorial-row__card { flex: 0 0 220px; }
 }
